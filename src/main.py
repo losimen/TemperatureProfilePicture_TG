@@ -6,6 +6,7 @@ import logging
 from PIL import Image, ImageDraw, ImageFont
 from pyrogram import Client
 from io import BytesIO
+from config import URL
 
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %H:%M:%S', filename='logs.txt')
@@ -14,7 +15,7 @@ logger.setLevel(logging.DEBUG)
 
 
 def get_bio():
-    x = requests.get('https://api.open-meteo.com/v1/forecast?latitude=50.45&longitude=30.52&hourly=temperature_2m')
+    x = requests.get(URL)
 
     temperature = x.json()['hourly']['temperature_2m'][0]
     for time in x.json()['hourly']['time']:
@@ -61,4 +62,3 @@ async def main():
 
 
 asyncio.run(main())
-print("Bot stopped!")
